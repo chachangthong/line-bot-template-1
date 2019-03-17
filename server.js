@@ -45,7 +45,7 @@ function reply(reply_token) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: 'Hello'
+            text: tex_t
         }]
     })
     request.post({
