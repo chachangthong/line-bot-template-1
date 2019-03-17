@@ -1,11 +1,3 @@
-
-
-
-
-
-
-// Reply with two static messages
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -13,12 +5,6 @@ const app = express()
 const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-
-var Token = process.env.TOKEN || "xxx";
-var access_token = 'Bearer {'+Token+'}'
-
-
 app.get('/',function (req, res) {
     res.end("ok bot")
     })
@@ -39,13 +25,13 @@ app.listen(port)
 function reply(reply_token) {
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': access_token
+        'Authorization': 'Bearer {8Unt/jPmaL5usxFzNSS8z+KTzmpG7oNJ6S1ukej7uTqHlt/7t3P8lnhJ8FZHyKvqMGmbsyhm1BbzKNlrE20m1KM5F8vYHG10/1VfW/CUdzCH0SxCSIdVWC+PgPEbcO9jiSZKxLhWoV6FuehIwrH2owdB04t89/1O/w1cDnyilFU=}'
     }
     let body = JSON.stringify({
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: tex_t
+            text: 'ok'
         }]
     })
     request.post({
