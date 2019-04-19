@@ -72,7 +72,7 @@ function handleMessageEvent(event) {
         {
           "type": "text",
           "text": "แต้มสะสม",
-          "size": "xl",
+          "size": "lg",
           "weight": "bold"
         },
         {
