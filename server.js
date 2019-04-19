@@ -9,11 +9,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
+    let msg = req.body.events[0].message.text
     reply(reply_token)
     res.sendStatus(200)
 })
 app.listen(port)
-function reply(reply_token) {
+function reply(reply_token, msg) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {C+oCzeM5fZhLng0L4c0evjDEZjF/EIDFKtR1Zgb3Mp3bT4OgeO2hB3x2tDPrILRqd2i0dO3htzvRV676dcTLV2wiaS29rfM26RIdDcvOBAJTjHrhlcsZPUeSrtAaQoS8AWRlN0RszPFWP6TfX7ZtsI9PbdgDzCFqoOLOYbqAITQ=}'
@@ -22,11 +23,7 @@ function reply(reply_token) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: 'Hello'
-        },
-        {
-            type: 'text',
-            text: 'How are you?'
+            text: msg
         }]
     })
     request.post({
