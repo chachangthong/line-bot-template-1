@@ -1,3 +1,5 @@
+    // Reply with two static messages
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -30,9 +32,9 @@ function reply(reply_token) {
     let body = JSON.stringify({
         replyToken: reply_token,
         messages: [{
-            "type": "text",
-            "text": "Hello, world"
-            }]
+            type: 'text',
+            text: 'ok'
+        }]
     })
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
