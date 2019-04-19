@@ -12,6 +12,8 @@ app.post('/webhook', (req, res) => {
     let msg = req.body.events[0].message.text
     reply(reply_token)
     res.sendStatus(200)
+    console.log("---0---");
+    console.log(tex_t);
 })
 app.listen(port)
 function reply(reply_token, msg) {
@@ -31,6 +33,6 @@ function reply(reply_token, msg) {
         headers: headers,
         body: body
     }, (err, res, body) => {
-        console.log('status = ' + res.statusCode);
+       // console.log('status = ' + res.statusCode);
     });
 }
