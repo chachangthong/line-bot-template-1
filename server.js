@@ -13,7 +13,7 @@ app.post('/webhook', (req, res) => {
     reply(reply_token)
     res.sendStatus(200)
     console.log("---0---");
-    console.log(tex_t);
+    console.log(msg);
 })
 app.listen(port)
 function reply(reply_token, msg) {
