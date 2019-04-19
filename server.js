@@ -21,17 +21,24 @@ function reply(reply_token, msg) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {C+oCzeM5fZhLng0L4c0evjDEZjF/EIDFKtR1Zgb3Mp3bT4OgeO2hB3x2tDPrILRqd2i0dO3htzvRV676dcTLV2wiaS29rfM26RIdDcvOBAJTjHrhlcsZPUeSrtAaQoS8AWRlN0RszPFWP6TfX7ZtsI9PbdgDzCFqoOLOYbqAITQ=}'
     }
+    
+    if(msg === "golf"){
+        
     let body = JSON.stringify({
         replyToken: reply_token,
         
-        if(msg === "golf"){
+       
         messages: [{
             type: 'text',
             text: 'ok'
-        }
+        
                    
         }]
     })
+    
+    }
+    
+    
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
         headers: headers,
