@@ -44,7 +44,7 @@ function handleMessageEvent(event) {
         }
     } else if (eventText === 'แต้มสะสม') {
         msg = {
-            {
+            
   "type": "flex",
   "altText": "Flex Message",
   "contents": {
@@ -166,7 +166,7 @@ function handleMessageEvent(event) {
       ]
     }
   }
-}
+
         }
     }
     
