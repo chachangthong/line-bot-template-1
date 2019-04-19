@@ -46,7 +46,7 @@ function handleMessageEvent(event) {
         msg = {
             
   "type": "flex",
-  "altText": "Flex Message",
+  "altText": "แต้มสะสม",
   "contents": {
     "type": "bubble",
     "direction": "ltr",
