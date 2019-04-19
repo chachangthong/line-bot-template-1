@@ -1,4 +1,4 @@
-    // Reply with two static messages
+// Echo reply
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -7,24 +7,14 @@ const app = express()
 const port = process.env.PORT || 4000
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.get('/',function (req, res) {
-    res.end("ok bot")
-    })
 app.post('/webhook', (req, res) => {
-     var tex_t = req.body.events[0].message.text
-     var sende_r = req.body.events[0].source.userId
-     var replytoke_n = req.body.events[0].replyToken
-    
-    console.log("---0---");
-    console.log(tex_t);
-    
     let reply_token = req.body.events[0].replyToken
-    reply(reply_token)
+    let msg = req.body.events[0].message.text
+    reply(reply_token, msg)
     res.sendStatus(200)
-    res.end("ok")
 })
 app.listen(port)
-function reply(reply_token) {
+function reply(reply_token, msg) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {b316afc916aeae77f04c89988efabcda}'
@@ -33,7 +23,7 @@ function reply(reply_token) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: 'ok'
+            text: msg
         }]
     })
     request.post({
@@ -41,6 +31,6 @@ function reply(reply_token) {
         headers: headers,
         body: body
     }, (err, res, body) => {
-        //console.log('status = ' + res.statusCode);
+        console.log('status = ' + res.statusCode);
     });
 }
