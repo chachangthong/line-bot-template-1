@@ -138,7 +138,7 @@ function handleMessageEvent(event) {
               "contents": [
                 {
                   "type": "text",
-                  "text": "ใช้ไปแล้ว",
+                  "text": "คงเหลือ",
                   "flex": 10,
                   "size": "lg",
                   "align": "start",
