@@ -16,7 +16,7 @@ app.listen(port)
 function reply(reply_token) {
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'b316afc916aeae77f04c89988efabcda'
+        'Authorization': '{b316afc916aeae77f04c89988efabcda}'
     }
     let body = JSON.stringify({
         replyToken: reply_token,
