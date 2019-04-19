@@ -24,7 +24,7 @@ function reply(reply_token, msg) {
     let body = JSON.stringify({
         replyToken: reply_token,
         
-        if(msg == "golf"){
+        if(msg === "golf"){
         messages: [{
             type: 'text',
             text: 'ok'
