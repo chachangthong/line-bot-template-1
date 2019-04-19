@@ -25,7 +25,7 @@ function reply(reply_token, msg) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: msg
+            text: 'ok'
         }]
     })
     request.post({
