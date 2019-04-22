@@ -182,7 +182,7 @@ function handleMessageEvent(event) {
     else if (eventText === 'สูตรชงเครื่องดื่ม') {
         msg ={
   "type": "template",
-  "altText": "this is a carousel template",
+  "altText": "สูตรชงเครื่องดื่ม",
   "template": {
     "type": "carousel",
     "actions": [],
