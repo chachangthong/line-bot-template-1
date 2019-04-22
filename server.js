@@ -1,5 +1,28 @@
 const express = require('express');
 const line = require('@line/bot-sdk');
+const mongoose = require('mongoose');
+const http = require('http');
+const Schema = mongoose.Schema;
+
+
+
+let Team = mongoose.model('Team', TeamSchema);
+let db = mongoose.connection;
+let dbUrl = 'mongodb://heroku_5f1cg5hc:oil192fvapo8g8qfpevgjj4g2g@ds261114.mlab.com:61114/heroku_5f1cg5hc';
+
+
+db.on('error', function () {console.log('error');});
+mongoose.connect(dbUrl, function (err) {
+if (err) {  return console.log('there was a problem' + err);  }
+console.log('connected!');
+var team = new Team({ name: 'Jehovah'  });
+team.save(function (error, data) {
+if (error) {console.log(error);} 
+db.close();
+process.exit();
+});
+});
+
 
 require('dotenv').config();
 
