@@ -77,14 +77,8 @@ function handleMessageEvent(event) {
     } 
     //////////////////
     else if (eventText === 'แต้มสะสม') {
-	//var newContact = "{title: totoken, age: eventText}"
-	    
-	
-	    
-	    
-	    
-	    
-        msg = {
+
+	    msg = {
             
   "type": "flex",
   "altText": "แต้มสะสม",
@@ -209,7 +203,8 @@ function handleMessageEvent(event) {
   }
 
         }
-	    db.collection(CONTACTS_COLLECTION).insertOne({title: "Artigo 199",age: "19",});
+	    db.collection(CONTACTS_COLLECTION).insertOne({title: totoken,age: eventText,});
+	    	//var newContact = "{title: totoken, age: eventText}"
     }
     
     ////////////////////////
