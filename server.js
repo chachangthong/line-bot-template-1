@@ -276,13 +276,7 @@ function handleMessageEvent(event) {
     
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
-    https.get("http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg="+ eventText , (resp) => {
-  let data = '';
-
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
+    https.get("http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg="+ eventText);
     
     
     
