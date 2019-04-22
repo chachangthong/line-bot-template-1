@@ -2,40 +2,12 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 const http = require('http');
 
-var path = require("path");
-var bodyParser = require("body-parser");
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
-
-var CONTACTS_COLLECTION = "contacts";
-
-
-
-
 
 
 require('dotenv').config();
 
 const app = express();
 
-
-
-
-app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.json());
-
-
-var db;
-
-// Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-    
-    db = database;
-  console.log("Database connection ready");
 
     
 ////////////////////////////////////////////////////////////////////////////////////////////
