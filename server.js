@@ -3,26 +3,20 @@ const line = require('@line/bot-sdk');
 const http = require('http');
 
 const MongoClient = require('mongodb').MongoClient;
+
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
+var CONTACTS_COLLECTION = "data_changthong";
+var db;
+
 const url = process.env.MONGODB_URI;
-
-
-MongoClient.connect(url, (err, db) => {
-	if(!err) {
-		console.log('Conectado');
-	}
-    db.collection('data_changthong', (err, collection) => {
-    collection.insert({title: "Artigo 199",age: "19",});
-    
-    db.collection('data_changthong').count((err, count) => {
-      if (err) throw err;            
-        console.log('total linhas inseridas: ' + count);
-    });
-  });
-});
-    
-    
-    
-    
+mongodb.MongoClient.connect(url, function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+db = database;
+console.log("Database connection ready");
 
 
 require('dotenv').config();
@@ -83,9 +77,20 @@ function handleMessageEvent(event) {
     } 
     //////////////////
     else if (eventText === 'แต้มสะสม') {
-	    db.collection('data_changthong', (err, collection) => {
-	    collection.insert({title: totoken, age: eventText});
-	});	    
+	var newContact = {title: totoken, age: eventText};
+	    
+	db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new contact.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});    
+	    
+	    
+	    
+	    
         msg = {
             
   "type": "flex",
