@@ -79,13 +79,7 @@ function handleMessageEvent(event) {
     else if (eventText === 'แต้มสะสม') {
 	var newContact = "{title: totoken, age: eventText}"
 	    
-	db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to create new contact.");
-    } else {
-      res.status(201).json(doc.ops[0]);
-    }
-  });  
+	db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc))
 	    
 	    
 	    
