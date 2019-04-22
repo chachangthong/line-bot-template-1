@@ -3,17 +3,17 @@ const line = require('@line/bot-sdk');
 const http = require('http');
 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://heroku_5f1cg5hc:oil192fvapo8g8qfpevgjj4g2g@ds261114.mlab.com:61114/heroku_5f1cg5hc';
-
+const url = process.env.MONGODB_URI;
+MONGODB_URI
 
 MongoClient.connect(url, (err, db) => {
 	if(!err) {
 		console.log('Conectado');
 	}
     db.collection('Artigos', (err, collection) => {
-    collection.insert({title: 'Artigo 1'});
-    collection.insert({title: 'Artigo 2'});
-    collection.insert({title: 'Artigo 3'});
+    collection.insert({title: "Artigo 199",age: "19",});
+    collection.insert({title: "Artigo 2",age: "20",});
+    collection.insert({title: "Artigo 3",age: "21",});
     
     db.collection('Artigos').count((err, count) => {
       if (err) throw err;            
