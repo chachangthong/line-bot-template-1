@@ -2,6 +2,29 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 const http = require('http');
 
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://heroku_5f1cg5hc:oil192fvapo8g8qfpevgjj4g2g@ds261114.mlab.com:61114/heroku_5f1cg5hc';
+
+
+MongoClient.connect(url, (err, db) => {
+	if(!err) {
+		console.log('Conectado');
+	}
+    db.collection('Artigos', (err, collection) => {
+    collection.insert({title: 'Artigo 1'});
+    collection.insert({title: 'Artigo 2'});
+    collection.insert({title: 'Artigo 3'});
+    
+    db.collection('Artigos').count((err, count) => {
+      if (err) throw err;            
+        console.log('total linhas inseridas: ' + count);
+    });
+  });
+});
+    
+    
+    
+    
 
 
 require('dotenv').config();
