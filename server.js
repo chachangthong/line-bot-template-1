@@ -205,8 +205,8 @@ function handleMessageEvent(event) {
   }
 
         }
-	    db.collection(CONTACTS_COLLECTION).insertOne({title: uid,age: eventText,});
-	    console.log("uid"+ event.source.userId);
+	    db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
+	    console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
     }
     
