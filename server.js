@@ -77,7 +77,7 @@ function handleMessageEvent(event) {
     } 
     //////////////////
     else if (eventText === 'แต้มสะสม') {
-	var newContact = {title: totoken, age: eventText};
+	var newContact = "{title: totoken, age: eventText}"
 	    
 	db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
     if (err) {
@@ -85,8 +85,7 @@ function handleMessageEvent(event) {
     } else {
       res.status(201).json(doc.ops[0]);
     }
-  });
-});    
+  });  
 	    
 	    
 	    
