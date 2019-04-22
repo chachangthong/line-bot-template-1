@@ -27,6 +27,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
       db = database;
   console.log("Database connection ready");
 
+  });
     
 ////////////////////////////////////////////////////////////////////////////////////////////
 const config = {
