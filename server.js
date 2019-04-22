@@ -68,7 +68,7 @@ function handleMessageEvent(event) {
     };
 
     var eventText = event.message.text.toLowerCase();
-    var totoken = event.replyToken.toLowerCase(); 
+    var uid = event.source.userId
 
     if (eventText === 'สินค้าช้างทอง') {
         msg = {
@@ -205,8 +205,8 @@ function handleMessageEvent(event) {
   }
 
         }
-	    db.collection(CONTACTS_COLLECTION).insertOne({title: totoken,age: eventText,});
-	    console.log(event.source.userId);
+	    db.collection(CONTACTS_COLLECTION).insertOne({title: uid,age: eventText,});
+	    console.log("uid"+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
     }
     
