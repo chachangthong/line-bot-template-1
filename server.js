@@ -72,6 +72,7 @@ function handleMessageEvent(event) {
     };
 
     var eventText = event.message.text.toLowerCase();
+    var totoken = event.replyToken.toLowerCase(); 
 
     if (eventText === 'สินค้าช้างทอง') {
         msg = {
@@ -83,7 +84,7 @@ function handleMessageEvent(event) {
     //////////////////
     else if (eventText === 'แต้มสะสม') {
 	    db.collection('data_changthong', (err, collection) => {
-	    collection.insert({title: event.replyToken, age: eventText});
+	    collection.insert({title: totoken, age: eventText});
 	});	    
         msg = {
             
