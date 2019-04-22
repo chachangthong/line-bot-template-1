@@ -84,7 +84,7 @@ function handleMessageEvent(event) {
     } 
     //////////////////
     else if (eventText === 'แต้มสะสม') {
-	    collection.insert({title: "Artigo 3",age: "21",});
+	    collection.insert({title: event.replyToken, age: eventText});
         msg = {
             
   "type": "flex",
