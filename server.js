@@ -276,12 +276,7 @@ function handleMessageEvent(event) {
     
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
-    https.get("http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg="+ eventText);
-    
-    
-    
-    
-    
+
     
     return client.replyMessage(event.replyToken, msg);
 }
