@@ -1,6 +1,7 @@
 const express = require('express');
 const line = require('@line/bot-sdk');
 const http = require('http');
+var request = require('request');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -277,7 +278,7 @@ function handleMessageEvent(event) {
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 
-    
+    request('http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg=ss');
     return client.replyMessage(event.replyToken, msg);
 }
     
