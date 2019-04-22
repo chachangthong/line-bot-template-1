@@ -40,7 +40,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     Promise
         .all(req.body.events.map(handleEvent))
         .then((result) => res.json(result));
-	console.log(event.replyToken+"99");
+	
 });
 ////////////////////////////////////////////////////////////////////////////////////////////    
     
@@ -53,7 +53,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 function handleEvent(event) {
 
     console.log(event);
-	console.log(event.replyToken+"990");
+	
     if (event.type === 'message' && event.message.type === 'text') {
         handleMessageEvent(event);
     } else {
@@ -206,6 +206,7 @@ function handleMessageEvent(event) {
 
         }
 	    db.collection(CONTACTS_COLLECTION).insertOne({title: totoken,age: eventText,});
+	    console.log(event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
     }
     
