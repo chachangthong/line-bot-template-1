@@ -4,7 +4,7 @@ const http = require('http');
 
 const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGODB_URI;
-MONGODB_URI
+
 
 MongoClient.connect(url, (err, db) => {
 	if(!err) {
