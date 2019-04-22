@@ -1,33 +1,44 @@
 const express = require('express');
 const line = require('@line/bot-sdk');
-const mongoose = require('mongoose');
 const http = require('http');
-const Schema = mongoose.Schema;
+
+var path = require("path");
+var bodyParser = require("body-parser");
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
+
+var CONTACTS_COLLECTION = "contacts";
 
 
 
-let Team = mongoose.model('Team', TeamSchema);
-let db = mongoose.connection;
-let dbUrl = 'mongodb://heroku_5f1cg5hc:oil192fvapo8g8qfpevgjj4g2g@ds261114.mlab.com:61114/heroku_5f1cg5hc';
 
-
-db.on('error', function () {console.log('error');});
-mongoose.connect(dbUrl, function (err) {
-if (err) {  return console.log('there was a problem' + err);  }
-console.log('connected!');
-var team = new Team({ name: 'Jehovah'  });
-team.save(function (error, data) {
-if (error) {console.log(error);} 
-db.close();
-process.exit();
-});
-});
 
 
 require('dotenv').config();
 
 const app = express();
 
+
+
+
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
+
+
+var db;
+
+// Connect to the database before starting the application server.
+mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+    
+    db = database;
+  console.log("Database connection ready");
+
+    
+////////////////////////////////////////////////////////////////////////////////////////////
 const config = {
     channelAccessToken: process.env.channelAccessToken,
     channelSecret: process.env.channelSecret
