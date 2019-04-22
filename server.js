@@ -48,7 +48,9 @@ function handleMessageEvent(event) {
             'originalContentUrl': 'https://www.igetweb.com/uploads/269/filemanager/211ef0e293ebc51c26deb468b13f52ac_full.png',
             'previewImageUrl': 'https://www.igetweb.com/uploads/269/filemanager/211ef0e293ebc51c26deb468b13f52ac_full.png'
         }
-    } else if (eventText === 'แต้มสะสม') {
+    } 
+    //////////////////
+    else if (eventText === 'แต้มสะสม') {
         msg = {
             
   "type": "flex",
@@ -176,6 +178,70 @@ function handleMessageEvent(event) {
         }
     }
     
+    ////////////////////////
+    else if (eventText === 'สูตรชงเครื่องดื่ม') {
+        msg ={
+  "type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+    "type": "carousel",
+    "actions": [],
+    "columns": [
+      {
+        "thumbnailImageUrl": "https://www.igetweb.com/uploads/269/filemanager/cb1df6cdbb19a80b25c96181a6f667cc_full.jpg",
+        "title": "สูตรชงชาเย็น",
+        "text": "อร่อย กลมกล่อม อย่างลงตัว",
+        "actions": [
+          {
+            "type": "uri",
+            "label": "ดูสูตรชง",
+            "uri": "line://app/1566203051-d890Z5L7"
+          }
+        ]
+      },
+      {
+        "thumbnailImageUrl": "https://www.igetweb.com/uploads/269/filemanager/cf6f56e252a9b4f50a0e6f67702ed3af_full.jpg",
+        "title": "สูตรชงชาเขียว",
+        "text": "รสชาติและกลิ่นชาเขียวแท้ ",
+        "actions": [
+          {
+            "type": "uri",
+            "label": "ดูสูตรชง",
+            "uri": "line://app/1566203051-jk5ARl9y"
+          }
+        ]
+      },
+      {
+        "thumbnailImageUrl": "https://www.igetweb.com/uploads/269/filemanager/cf6c6dc522abca1e89d0ba265298dd53_full.jpg",
+        "title": "สูตรชงกาแฟ",
+        "text": "เข้มข้นถึงใจ หอมกรุ่นตั้งแต่ฉีกซอง",
+        "actions": [
+          {
+            "type": "uri",
+            "label": "ดูสูตรชง",
+            "uri": "line://app/1566203051-J8KvGEox"
+          }
+        ]
+      },
+      {
+        "thumbnailImageUrl": "https://www.igetweb.com/uploads/269/filemanager/60cabb85e7f506abeb32372690688bb8_full.jpg",
+        "title": "สูตรชงโกโก้",
+        "text": "เข้มข้น หอม หวาน สไตล์โกโก้",
+        "actions": [
+          {
+            "type": "uri",
+            "label": "ดูสูตรชง",
+            "uri": "line://app/1566203051-an9QNEgx"
+          }
+        ]
+      }
+    ]
+  }
+} 
+
+    }
+    //////////////////
+    
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     
     /*
@@ -285,6 +351,13 @@ function handleMessageEvent(event) {
         }
     }
 */
+    
+    
+    
+    
+    
+    
+    
     return client.replyMessage(event.replyToken, msg);
 }
 
