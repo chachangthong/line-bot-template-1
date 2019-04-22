@@ -11,9 +11,7 @@ MongoClient.connect(url, (err, db) => {
 		console.log('Conectado');
 	}
     db.collection('data_changthong', (err, collection) => {
-    //collection.insert({title: "Artigo 199",age: "19",});
-    //collection.insert({title: "Artigo 2",age: "20",});
-    //collection.insert({title: "Artigo 3",age: "21",});
+    collection.insert({title: "Artigo 199",age: "19",});
     
     db.collection('data_changthong').count((err, count) => {
       if (err) throw err;            
