@@ -18,12 +18,6 @@ app.use(bodyParser.json());//+++
 var db;//+++
 
 
-
-
-
-
-
-
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
   if (err) {
     console.log(err);
@@ -32,11 +26,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     
       db = database;
   console.log("Database connection ready");
-    
-    function handleError(res, reason, message, code) {
-  console.log("ERROR: " + reason);
-  res.status(code || 500).json({"error": message});
-}
+
     
 ////////////////////////////////////////////////////////////////////////////////////////////
 const config = {
@@ -51,7 +41,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
         .all(req.body.events.map(handleEvent))
         .then((result) => res.json(result));
 });
-    
+////////////////////////////////////////////////////////////////////////////////////////////    
     
     
     
@@ -68,15 +58,15 @@ app.post('/webhook', line.middleware(config), (req, res) => {
   });
 });
     
-    app.post("/contacts", function(req, res) {
+ app.post("/contacts", function(req, res) {
   var newContact = req.body;
   newContact.createDate = new Date();
 
   if (!(req.body.firstName || req.body.lastName)) {
     handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
   }
-    
-    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
+
+  db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to create new contact.");
     } else {
@@ -84,8 +74,12 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     }
   });
 });
-    
-    app.get("/contacts/:id", function(req, res) {
+  
+  
+  
+  
+  
+  app.get("/contacts/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
@@ -94,8 +88,28 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     }
   });
 });
-
-app.put("/contacts/:id", function(req, res) {
+  
+  
+  
+  
+  
+  app.delete("/contacts/:id", function(req, res) {
+  db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(204).end();
+    }
+  });
+});
+  
+  
+  
+  
+  
+  
+  
+  app.put("/contacts/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
@@ -107,24 +121,6 @@ app.put("/contacts/:id", function(req, res) {
     }
   });
 });
-
-app.delete("/contacts/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(204).end();
-    }
-  });
-});
-
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -473,10 +469,10 @@ function handleMessageEvent(event) {
     
     
     
-    
-
-app.set('port', (process.env.PORT || 5000));
+    app.set('port', (process.env.PORT || 5000));
 
 app.listen(app.get('port'), function () {
     console.log('run at port', app.get('port'));
 });
+
+
