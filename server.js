@@ -10,8 +10,6 @@ var ObjectID = mongodb.ObjectID;
 var CONTACTS_COLLECTION = "data_changthong";
 var db;
 
-var name;
-var picture;
 
 
 
@@ -98,8 +96,8 @@ client.getProfile(event.source.userId)
     console.log(profile.userId);
     console.log(profile.pictureUrl);
     console.log(profile.statusMessage);
-name = profile.displayName;
-picture = profile.pictureUrl;
+var name = profile.displayName;
+var picture = profile.pictureUrl;
 	  })
   .catch((err) => {
     // error handling
