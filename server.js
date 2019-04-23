@@ -81,6 +81,20 @@ function handleMessageEvent(event) {
     //////////////////
     else if (eventText === 'แต้มสะสม') {
 
+client.getProfile(event.source.userId)
+  .then((profile) => {
+    console.log(profile.displayName);
+    console.log(profile.userId);
+    console.log(profile.pictureUrl);
+    console.log(profile.statusMessage);
+  })
+  .catch((err) => {
+    // error handling
+  });
+	    
+	    
+	    
+request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'uid&entry.556749397=name&entry.1687867422=picture&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
 	    msg = {
             
   "type": "flex",
@@ -206,9 +220,11 @@ function handleMessageEvent(event) {
   }
 
         }
-	    db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
+	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
+	    
+	    
     }
     
     ////////////////////////
@@ -278,7 +294,7 @@ function handleMessageEvent(event) {
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 
-    request('http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg=ss');
+    //request('http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg=ss');
     return client.replyMessage(event.replyToken, msg);
 }
     
