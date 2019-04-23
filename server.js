@@ -13,7 +13,7 @@ admin.initializeApp({
   }
 });
 var db = admin.database();
-var ref = db.ref("/some_resource");
+var ref = db.ref("/data");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
@@ -114,9 +114,10 @@ var picture = profile.pictureUrl;
 	  
 var usersRef = ref.child("users");
 usersRef.set({
-  golf: {
+  name : {
+    name : profile.displayName,  
     userId: event.source.userId,
-    name: picture
+    
   }
 });
 
