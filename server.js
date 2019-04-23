@@ -10,6 +10,13 @@ var ObjectID = mongodb.ObjectID;
 var CONTACTS_COLLECTION = "data_changthong";
 var db;
 
+var name;
+var picture;
+
+
+
+
+
 const url = process.env.MONGODB_URI;
 mongodb.MongoClient.connect(url, function (err, database) {
   if (err) {
@@ -91,11 +98,16 @@ client.getProfile(event.source.userId)
     console.log(profile.userId);
     console.log(profile.pictureUrl);
     console.log(profile.statusMessage);
-
+name = profile.displayName;
+picture = profile.pictureUrl;
+	  })
+  .catch((err) => {
+    // error handling
+  });  
 	    
 	    
 	    
-request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+profile.displayName+'&entry.1687867422='+profile.pictureUrl+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
+request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
 	    msg = {
             
   "type": "flex",
@@ -224,10 +236,7 @@ request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    //console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
-	  })
-  .catch((err) => {
-    // error handling
-  });    
+  
 	    
     }
     
