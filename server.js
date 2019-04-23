@@ -116,7 +116,7 @@ var usersRef = ref.child("users");
 usersRef.set({
   golf: {
     userId: event.source.userId,
-    name: profile.displayName
+    name: picture
   }
 });
 
