@@ -91,10 +91,7 @@ client.getProfile(event.source.userId)
     console.log(profile.userId);
     console.log(profile.pictureUrl);
     console.log(profile.statusMessage);
-  })
-  .catch((err) => {
-    // error handling
-  });
+
 	    
 	    
 	    
@@ -227,7 +224,10 @@ request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    //console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
-	    
+	  })
+  .catch((err) => {
+    // error handling
+  });    
 	    
     }
     
