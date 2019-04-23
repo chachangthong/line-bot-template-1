@@ -13,7 +13,7 @@ admin.initializeApp({
   }
 });
 var db = admin.database();
-//var ref = db.ref("/data");
+var ref = db.ref("/data");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
