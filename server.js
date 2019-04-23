@@ -123,9 +123,10 @@ name : {
 ref.child(event.source.userIddata).update(data, function(err) {
 
 if (err) {
+	ref.push(data) 
 } else {
 
-ref.push(data) 
+
 }
 });
 	
