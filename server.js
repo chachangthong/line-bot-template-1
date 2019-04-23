@@ -11,10 +11,6 @@ var CONTACTS_COLLECTION = "data_changthong";
 var db;
 
 
-
-
-
-
 const url = process.env.MONGODB_URI;
 mongodb.MongoClient.connect(url, function (err, database) {
   if (err) {
@@ -98,6 +94,7 @@ client.getProfile(event.source.userId)
     console.log(profile.statusMessage);
 var name = profile.displayName;
 var picture = profile.pictureUrl;
+	request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');	
 	  })
   .catch((err) => {
     // error handling
@@ -105,7 +102,7 @@ var picture = profile.pictureUrl;
 	    
 	    
 	    
-request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
+
 	    msg = {
             
   "type": "flex",
