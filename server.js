@@ -13,7 +13,7 @@ admin.initializeApp({
   }
 });
 var db = admin.database();
-var ref = db.ref("/data");
+//var ref = db.ref("/data");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
@@ -104,14 +104,14 @@ function handleMessageEvent(event) {
 
 client.getProfile(event.source.userId)
   .then((profile) => {
-    console.log(profile.displayName);
-    console.log(profile.userId);
-    console.log(profile.pictureUrl);
-    console.log(profile.statusMessage);
+    //console.log(profile.displayName);
+    //console.log(profile.userId);
+    //console.log(profile.pictureUrl);
+    //console.log(profile.statusMessage);
 var name = profile.displayName;
 var picture = profile.pictureUrl;
-	request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');	
-	  
+//request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');	
+	
 var usersRef = ref.child("users");
 usersRef.set({
   name : {
