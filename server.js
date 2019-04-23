@@ -78,7 +78,11 @@ function handleMessageEvent(event) {
             'previewImageUrl': 'https://www.igetweb.com/uploads/269/filemanager/211ef0e293ebc51c26deb468b13f52ac_full.png'
         }
     } 
-    //////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
     else if (eventText === 'แต้มสะสม') {
 
 client.getProfile(event.source.userId)
@@ -94,7 +98,7 @@ client.getProfile(event.source.userId)
 	    
 	    
 	    
-request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'uid&entry.556749397=name&entry.1687867422=picture&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
+request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+profile.displayName+'&entry.1687867422='+profile.pictureUrl+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');
 	    msg = {
             
   "type": "flex",
@@ -221,7 +225,7 @@ request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs
 
         }
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
-	    console.log("-- > uid : "+ event.source.userId);
+	    //console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
 	    
 	    
