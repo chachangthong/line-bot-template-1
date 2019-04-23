@@ -115,14 +115,14 @@ var picture = profile.pictureUrl;
 var data = { 
     name : profile.displayName,  
     userId: event.source.userId,
-    point: ""
+    
 }	
 
 
 ref.child(event.source.userId).update(data, function(err) {
 
 if (err) {
-	ref.push(data) 
+  //ref.push(data) 
 } else {
 
 
@@ -144,9 +144,10 @@ usersRef.set({
 })
   .catch((err) => {
     // error handling
-  });  
-
+  }); 
 	    
+ref.once("value", function(snapshot) {
+  var lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("name").val();	    
 	    
 
 	msg = {       
@@ -200,7 +201,7 @@ usersRef.set({
                 },
                 {
                   "type": "text",
-                  "text": "200",
+                  "text": lastName,
                   "flex": 5,
                   "size": "xl",
                   "weight": "bold",
@@ -260,6 +261,8 @@ usersRef.set({
                   "weight": "bold",
                   "color": "#FF0000",
                   "wrap": true
+			
+			
                 }
               ]
             }
@@ -273,6 +276,9 @@ usersRef.set({
   }
 
         }
+	
+});	//////////////////////////get
+	
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    //console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
