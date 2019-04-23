@@ -115,7 +115,8 @@ var picture = profile.pictureUrl;
 var data = { 
 name : {
     name : profile.displayName,  
-    userId: event.source.userId,   
+    userId: event.source.userId,
+    point:
   }
 }	
 
@@ -150,8 +151,7 @@ usersRef.set({
 	    
 	    
 
-	    msg = {
-            
+	msg = {       
   "type": "flex",
   "altText": "แต้มสะสม",
   "contents": {
