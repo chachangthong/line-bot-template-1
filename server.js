@@ -18,7 +18,7 @@ admin.initializeApp({
 var db = admin.database();
 var ref = db.ref("/datdb");
 ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
 });
 
 
