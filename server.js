@@ -150,7 +150,7 @@ usersRef.set({
   }); 
 	    
 ref.once("value", function(snapshot) {
-  lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("name").val();	    
+  lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("point").val();	    
 });
 	    
 	    
