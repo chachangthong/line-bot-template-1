@@ -5,6 +5,9 @@ var request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
 
+var lastName; 
+
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://db-changthong.firebaseio.com",
@@ -147,7 +150,9 @@ usersRef.set({
   }); 
 	    
 ref.once("value", function(snapshot) {
-  var lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("name").val();	    
+  lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("name").val();	    
+});
+	    
 	    
 
 	msg = {       
@@ -277,7 +282,7 @@ ref.once("value", function(snapshot) {
 
         }
 	
-});	//////////////////////////get
+
 	
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    //console.log("-- > uid : "+ event.source.userId);
