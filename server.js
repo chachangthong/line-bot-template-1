@@ -13,7 +13,7 @@ admin.initializeApp({
   }
 });
 var db = admin.database();
-var ref = db.ref("/data");
+var ref = db.ref("/datdb");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
@@ -118,11 +118,16 @@ name : {
     userId: event.source.userId,   
   }
 }	
-	
-	
-	
+
+
+ref.child(event.source.userIddata).update(data, function(err) {
+
+if (err) {
+} else {
+
 ref.push(data) 
-	
+}
+});
 	
 	
 /*	
