@@ -120,7 +120,7 @@ name : {
 }	
 
 
-ref.child(event.source.userIddata).update(data, function(err) {
+ref.child(event.source.userId).update(data, function(err) {
 
 if (err) {
 	ref.push(data) 
