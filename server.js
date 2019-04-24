@@ -5,7 +5,7 @@ var request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
 
-var lastName; 
+
 
 
 admin.initializeApp({
@@ -104,50 +104,32 @@ function handleMessageEvent(event) {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
     else if (eventText === 'แต้มสะสม') {
-
-client.getProfile(event.source.userId)
-  .then((profile) => {
-    //console.log(profile.displayName);
-    //console.log(profile.userId);
-    //console.log(profile.pictureUrl);
-    //console.log(profile.statusMessage);
-var name = profile.displayName;
-var picture = profile.pictureUrl;
-//request('https://docs.google.com/forms/u/2/d/1iUGX58guFhU3bkt1OglhOGoDuv5i6mPQAs35gy4IOcw/formResponse?ifq&entry.1691916586='+event.source.userId+'&entry.556749397='+name+'&entry.1687867422='+picture+'&entry.66040433=data1&entry.1800492209=data2&entry.53513319=data3&entry.1987831678=data4&submit=Submit');	
-
+var point;
+var name;   
+var userId = event.source.userId;    
+//////////////////////////////////////////////////////
+      client.getProfile(event.source.userId)
+      .then((profile) => {
+	 name = profile.displayName;
+	 picture = profile.pictureUrl;     
+	    })
+//////////////////////////////////////////////////////	    
 var data = { 
     userId: event.source.userId,		
 }	
-
-
+//////////////////////////////////////////////////////
 ref.child(name).update(data, function(err) {
 if (err) {
   //ref.push(data) 
 } else {
 }
 });
-	
-	
-/*	
-var usersRef = ref.child(userId);
-usersRef.set({
-    name : profile.displayName,  
-    userId: event.source.userId,
-});
-*/
-
-
-})
-  .catch((err) => {
-    // error handling
-  }); 
-	    
-ref.once("value", function(snapshot) {
-  lastName = snapshot.child("U124c39c2fd8bc30bf48fa564296afad6").child("point").val();	    
-});
 	    
 	    
-
+	    
+	    
+	    
+	    
 	msg = {       
   "type": "flex",
   "altText": "แต้มสะสม",
