@@ -124,25 +124,20 @@ if (err) {
 }
 });
 //////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    	    	    
-
+msg = {
+        type: 'text',
+        text: "รอการอัพเดท"
+   };
 ref.once("value", function(snapshot) {
   var pointU = snapshot.child(userId).child("point").val();
 var pointNO;
-    msg = {
-        type: 'text',
-        text: pointU
-    };
+    
 if (pointU == null) {
 console.log("รอการอัพเดท");
      pointNO = "รอการอัพเดท"
  } else {
- msg = {
-        type: 'text',
-        text: "555"
-    };	 
 console.log("คะแนน"+ pointU);
-     pointNO = pointU  
-  }	// ของ else ส่งคะแนน	
+ }	// ของ else ส่งคะแนน	
  
 });	    
 //////////////////////////////////////////////////////	    
