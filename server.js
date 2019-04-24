@@ -5,9 +5,6 @@ var request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
 
-
-
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://db-changthong.firebaseio.com",
@@ -21,14 +18,13 @@ ref.once("value", function(snapshot) {
   //console.log(snapshot.val());
 });
 
-
+////////////////////////////////////mongodb////////////////////////////////////////////////////////
+/*
 const MongoClient = require('mongodb').MongoClient;
-
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 var CONTACTS_COLLECTION = "data_changthong";
 var db;
-
 
 const url = process.env.MONGODB_URI;
 mongodb.MongoClient.connect(url, function (err, database) {
@@ -38,7 +34,8 @@ mongodb.MongoClient.connect(url, function (err, database) {
   }
 db = database;
 console.log("Database connection ready");
-
+*/	
+////////////////////////////////////////mongodb////////////////////////////////////////////////////
 
 require('dotenv').config();
 
@@ -73,7 +70,8 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 function handleEvent(event) {
 
-    console.log(event);
+    console.log(event);  // ปริ้นทั้งหมด
+    
 	
     if (event.type === 'message' && event.message.type === 'text') {
         handleMessageEvent(event);
@@ -90,6 +88,10 @@ function handleMessageEvent(event) {
 
     var eventText = event.message.text.toLowerCase();
     var uid = event.source.userId
+    
+    console.log("UserID " + uid);
+    console.log("msg " + eventText);
+    	
 
     if (eventText === 'สินค้าช้างทอง') {
         msg = {
@@ -134,7 +136,7 @@ if (err) {
 })	//client.getProfile    
 //////////////////////////////////////////////////////
 ref.once("value", function(snapshot) {
-  poinU = snapshot.child("userId").child("point").val();	    
+  poinU = snapshot.child(userId).child("point").val();	    
 });	    
 	    
 	msg = {       
