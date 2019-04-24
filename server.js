@@ -215,7 +215,7 @@ ref.once("value", function(snapshot) {
                 },
                 {
                   "type": "text",
-                  "text": poinU,
+                  "text": "2582",
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
