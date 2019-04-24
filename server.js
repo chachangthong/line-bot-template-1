@@ -144,6 +144,8 @@ poinUU = "ไม่มีคะแนน";
 console.log("คะแนน"+ poinU);
 poinUU = poinU;	  
   }
+	console.log(poinUU);
+	
 	
 });	    
 	    
