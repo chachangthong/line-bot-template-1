@@ -124,9 +124,11 @@ if (err) {
 }
 });
 //////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    	    	    
-var pointNO;
+
 ref.once("value", function(snapshot) {
-  var pointU = snapshot.child(userId).child("point").val();	    
+  var pointU = snapshot.child(userId).child("point").val();
+var pointNO;
+	
 if (pointU == null) {
 console.log("รอการอัพเดท");
      pointNO = "รอการอัพเดท"
