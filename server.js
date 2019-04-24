@@ -114,9 +114,10 @@ var data = {
     userId: userId,		
 }    
 //////////////////////////////////////////////////////
+var nameU; 
       client.getProfile(event.source.userId)
       .then((profile) => {
-	 var nameU = profile.displayName;
+	 nameU = profile.displayName;
 	 var pictureU = profile.pictureUrl;     
 	    
 //////////////////////////////////////////////////////	    
@@ -134,17 +135,17 @@ if (err) {
 //////////////////////////////////////////////////////	    
 })	//client.getProfile    
 //////////////////////////////////////////////////////
-var poinUU;
+var pointUU;
 ref.once("value", function(snapshot) {
-  var poinU = snapshot.child(userId).child("point").val();	    
-if (poinU == null) {
+  var pointU = snapshot.child(nameU).child("point").val();	    
+if (pointU == null) {
 console.log("ไม่มีคะแนน");
 poinUU = "ไม่มีคะแนน";
   } else {
-console.log("คะแนน"+ poinU);
-poinUU = poinU;	  
+console.log("คะแนน"+ pointU);
+pointUU = pointU;	  
   }
-	console.log(poinUU);
+	console.log(nameU);
 	
 	
 });	    
