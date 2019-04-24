@@ -70,7 +70,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 function handleEvent(event) {
 
-    console.log(event);  // ปริ้นทั้งหมด
+    //console.log(event);  // ปริ้นทั้งหมด
     
 	
     if (event.type === 'message' && event.message.type === 'text') {
@@ -88,9 +88,11 @@ function handleMessageEvent(event) {
 
     var eventText = event.message.text.toLowerCase();
     var uid = event.source.userId
-    
-    console.log("UserID " + uid);
-    console.log("msg " + eventText);
+    var showLog = {
+        "UserID : " + uid,
+        "msg : " + eventText
+    }
+    console.log(showLog);
     	
 
     if (eventText === 'สินค้าช้างทอง') {
