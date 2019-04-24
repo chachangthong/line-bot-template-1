@@ -145,6 +145,9 @@ console.log("ไม่มีข้อมูล --  ลงใหม่");
 console.log("คะแนน"+ pointU);
  }	// ของ else ส่งคะแนน	
  
+return client.replyMessage(event.replyToken, msg);	
+	
+	
 });	
 
 
