@@ -104,20 +104,22 @@ function handleMessageEvent(event) {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
     else if (eventText === 'แต้มสะสม') {
+	    
+	    
 var poinU;
-var nameU;   
-var pictureU; 
 var userId = event.source.userId; 
+//////////////////////////////////////////////////////
+var data = { 
+    userId: userId,		
+}    
 //////////////////////////////////////////////////////
       client.getProfile(event.source.userId)
       .then((profile) => {
-	 nameU = profile.displayName;
-	 pictureU = profile.pictureUrl;     
-	    })
+	 var nameU = profile.displayName;
+	 var pictureU = profile.pictureUrl;     
+	    
 //////////////////////////////////////////////////////	    
-var data = { 
-    userId: event.source.userId,		
-}	
+	
 //////////////////////////////////////////////////////
 ref.child(nameU).update(data, function(err) {
 if (err) {
@@ -128,7 +130,9 @@ if (err) {
 	    
 	    
 	    
-	    
+//////////////////////////////////////////////////////	    
+})	//client.getProfile    
+//////////////////////////////////////////////////////
 	    
 	    
 	msg = {       
