@@ -104,15 +104,9 @@ function handleMessageEvent(event) {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-    else if (eventText === 'แต้มสะสม') {
-	    
-	    
-
+    else if (eventText === 'แต้มสะสม') {	    
 var userId = event.source.userId; 
 //////////////////////////////////////////////////////
-    
-//////////////////////////////////////////////////////
-
       client.getProfile(event.source.userId)
       .then((profile) => {
 	 var nameU = profile.displayName;
@@ -129,10 +123,7 @@ if (err) {
 } else {
 }
 });
-//////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    
-	    
-	    
-
+//////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    	    	    
 var pointNO;
 ref.once("value", function(snapshot) {
   var pointU = snapshot.child(userId).child("point").val();	    
@@ -143,132 +134,10 @@ console.log("รอการอัพเดท");
 console.log("คะแนน"+ pointU);
      pointNO = pointU  
   }	// ของ else ส่งคะแนน	
-msg = {       
-  "type": "flex",
-  "altText": "แต้มสะสม",
-  "contents": {
-    "type": "bubble",
-    "direction": "ltr",
-    "hero": {
-      "type": "image",
-      "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
-      "align": "start",
-      "gravity": "top",
-      "size": "full",
-      "aspectRatio": "20:13",
-      "aspectMode": "cover",
-      "action": {
-        "type": "uri",
-        "label": "Line",
-        "uri": "https://linecorp.com/"
-      }
-    },
-    "body": {
-      "type": "box",
-      "layout": "vertical",
-      "flex": 8,
-      "contents": [
-        {
-          "type": "text",
-          "text": "แต้มสะสม",
-          "size": "lg",
-          "weight": "bold"
-        },
-        {
-          "type": "box",
-          "layout": "vertical",
-          "spacing": "sm",
-          "margin": "lg",
-          "contents": [
-            {
-              "type": "box",
-              "layout": "baseline",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "แต้มทั้งหมด",
-                  "flex": 10,
-                  "size": "lg",
-                  "color": "#AAAAAA"
-                },
-                {
-                  "type": "text",
-                  "text": pointNO,
-                  "flex": 5,
-                  "size": "xl",
-                  "weight": "bold",
-                  "color": "#FF0000",
-                  "wrap": true
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "baseline",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "ใช้ไปแล้ว",
-                  "flex": 10,
-                  "size": "lg",
-                  "align": "start",
-                  "gravity": "top",
-                  "color": "#AAAAAA"
-                },
-                {
-                  "type": "text",
-                  "text": pointNO,
-                  "flex": 5,
-                  "size": "xl",
-                  "align": "start",
-                  "gravity": "top",
-                  "weight": "bold",
-                  "color": "#FF0000",
-                  "wrap": true
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "baseline",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "คงเหลือ",
-                  "flex": 10,
-                  "size": "lg",
-                  "align": "start",
-                  "gravity": "top",
-                  "color": "#AAAAAA"
-                },
-                {
-                  "type": "text",
-                  "text": pointNO,
-                  "flex": 5,
-                  "size": "xl",
-                  "align": "start",
-                  "gravity": "top",
-                  "weight": "bold",
-                  "color": "#FF0000",
-                  "wrap": true
-			
-			
-                }
-              ]
-            }
-              
-              
-              
-          ]
-        }
-      ]
-    }
-  }
-
-        }
+msg = {
+        type: 'text',
+        text: pointNO
+    };
  
 });	    
 //////////////////////////////////////////////////////	    
@@ -283,7 +152,7 @@ msg = {
 	    	//var newContact = "{title: totoken, age: eventText}"
   
 	    
-    }
+}
     
     ////////////////////////
     else if (eventText === 'สูตรชงเครื่องดื่ม') {
