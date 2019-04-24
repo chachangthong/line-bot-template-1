@@ -138,14 +138,14 @@ ref.child(userId).update(data, function(err) {
 console.log("ไม่มีข้อมูล --  ลงใหม่");
 
     } else { //มีข้อมูลแล้ว
-            msg = {
-                type: 'text',
-                text: "รอการอัพเดท"
-            };
+            
 console.log("คะแนน"+ pointU);
  }	// ของ else ส่งคะแนน	
  
-return client.replyMessage(event.replyToken, msg);	
+	msg = {
+                type: 'text',
+                text: "รอการอัพเดท"
+            };
 	
 	
 });	
