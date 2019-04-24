@@ -181,7 +181,7 @@ if (err) {
                 },
                 {
                   "type": "text",
-                  "text": lastName,
+                  "text": "ยังไม่มีการอัพเดท",
                   "flex": 5,
                   "size": "xl",
                   "weight": "bold",
