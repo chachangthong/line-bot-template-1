@@ -107,7 +107,7 @@ function handleMessageEvent(event) {
     else if (eventText === 'แต้มสะสม') {
 	    
 	    
-var poinU;
+
 var userId = event.source.userId; 
 //////////////////////////////////////////////////////
 var data = { 
@@ -134,6 +134,7 @@ if (err) {
 //////////////////////////////////////////////////////	    
 })	//client.getProfile    
 //////////////////////////////////////////////////////
+var poinU;
 ref.once("value", function(snapshot) {
   poinU = snapshot.child(userId).child("point").val();	    
 });	    
@@ -214,7 +215,7 @@ ref.once("value", function(snapshot) {
                 },
                 {
                   "type": "text",
-                  "text": "2582",
+                  "text": poinU,
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
