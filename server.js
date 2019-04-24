@@ -133,7 +133,9 @@ if (err) {
 //////////////////////////////////////////////////////	    
 })	//client.getProfile    
 //////////////////////////////////////////////////////
-	    
+ref.once("value", function(snapshot) {
+  poinU = snapshot.child("userId").child("point").val();	    
+});	    
 	    
 	msg = {       
   "type": "flex",
@@ -211,7 +213,7 @@ if (err) {
                 },
                 {
                   "type": "text",
-                  "text": "50",
+                  "text": poinU,
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
