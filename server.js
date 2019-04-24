@@ -105,58 +105,69 @@ function handleMessageEvent(event) {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
     else if (eventText === 'แต้มสะสม') {
-	    
-	    msg = {
-        type: 'text',
-        text: "รอการอัพเดท"
-   };
-	    
-	    
+    
 var userId = event.source.userId; 
+
+
 //////////////////////////////////////////////////////
       client.getProfile(event.source.userId)
       .then((profile) => {
 	 var nameU = profile.displayName;
-	 var pictureU = profile.pictureUrl;     
+	 //var pictureU = profile.pictureUrl;     
 	    
-//////////////////////////////////////////////////////	    
+//////////////////////////////////////////////////////	
+
+// ข้อมูล
 var data = { 
     name: nameU,		
-}	
-//////////////////////////////////////////////////////
-ref.child(userId).update(data, function(err) {
-if (err) {
-  //ref.push(data) 
-} else {
 }
-});
-//////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    	    	    
 
+//ตรวจสอบว่ามีข้อมูลไหม
 ref.once("value", function(snapshot) {
   var pointU = snapshot.child(userId).child("point").val();
-var pointNO;
-    
-if (pointU == null) {
-console.log("รอการอัพเดท");
-     pointNO = "รอการอัพเดท"
- } else {
+
+    if (pointU == null) {
+    //ไม่มี ให้ลงข้อมูล
+ref.child(userId).update(data, function(err) {
+        if (err) {
+  //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
+            } else {
+  //ลงข้อมูลได้  
+        }
+});
+console.log("ไม่มีข้อมูล --  ลงใหม่");
+
+    } else { //มีข้อมูลแล้ว
+            msg = {
+                type: 'text',
+                text: "รอการอัพเดท"
+            };
 console.log("คะแนน"+ pointU);
  }	// ของ else ส่งคะแนน	
  
-});	    
+});	
+
+
+
+
+	    
+
+    
+
+//////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    	    	    
+
+    
 //////////////////////////////////////////////////////	    
 })	//client.getProfile    
 //////////////////////////////////////////////////////  //////////////////////////////////////////////////////	    
-	
-	
 
-	
 	   // db.collection(CONTACTS_COLLECTION).insertOne({uid: uid, text: eventText,});
 	    //console.log("-- > uid : "+ event.source.userId);
 	    	//var newContact = "{title: totoken, age: eventText}"
-  
-	    
-}
+
+}// ของ else if  'แต้มสะสม'
     
     ////////////////////////
     else if (eventText === 'สูตรชงเครื่องดื่ม') {
