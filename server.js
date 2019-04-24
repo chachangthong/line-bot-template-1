@@ -134,9 +134,17 @@ if (err) {
 //////////////////////////////////////////////////////	    
 })	//client.getProfile    
 //////////////////////////////////////////////////////
-var poinU;
+var poinUU;
 ref.once("value", function(snapshot) {
-  poinU = snapshot.child(userId).child("point").val();	    
+  var poinU = snapshot.child(userId).child("point").val();	    
+if (poinU == null) {
+console.log("ไม่มีคะแนน");
+poinUU = "ไม่มีคะแนน";
+  } else {
+console.log("คะแนน"+ poinU);
+poinUU = poinU;	  
+  }
+	
 });	    
 	    
 	msg = {       
@@ -215,7 +223,7 @@ ref.once("value", function(snapshot) {
                 },
                 {
                   "type": "text",
-                  "text": "เทส",
+                  "text": poinUU,
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
