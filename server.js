@@ -88,10 +88,7 @@ function handleMessageEvent(event) {
 
     var eventText = event.message.text.toLowerCase();
     var uid = event.source.userId
-    var showLog = {
-        "UserID : " + uid,
-        "msg : " + eventText
-    }
+    var showLog = "{ UserID : "+uid +" , " + "msg : "  + eventText + "}"
     console.log(showLog);
     	
 
