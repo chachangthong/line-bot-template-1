@@ -110,47 +110,40 @@ function handleMessageEvent(event) {
 
 var userId = event.source.userId; 
 //////////////////////////////////////////////////////
-var data = { 
-    userId: userId,		
-}    
+    
 //////////////////////////////////////////////////////
-var nameU; 
+
       client.getProfile(event.source.userId)
       .then((profile) => {
-	 nameU = profile.displayName;
+	 var nameU = profile.displayName;
 	 var pictureU = profile.pictureUrl;     
 	    
 //////////////////////////////////////////////////////	    
-	
+var data = { 
+    name: nameU,		
+}	
 //////////////////////////////////////////////////////
-ref.child(nameU).update(data, function(err) {
+ref.child(userId).update(data, function(err) {
 if (err) {
   //ref.push(data) 
 } else {
 }
 });
+//////////////////////////////////////////////////////	//////////////////////////////////////////////////////		    
 	    
 	    
-	    
-//////////////////////////////////////////////////////	    
-})	//client.getProfile    
-//////////////////////////////////////////////////////
-var pointUU;
+
+var pointNO;
 ref.once("value", function(snapshot) {
-  var pointU = snapshot.child(nameU).child("point").val();	    
+  var pointU = snapshot.child(userId).child("point").val();	    
 if (pointU == null) {
-console.log("ไม่มีคะแนน");
-poinUU = "ไม่มีคะแนน";
-  } else {
+console.log("รอการอัพเดท");
+     pointNO = "รอการอัพเดท"
+ } else {
 console.log("คะแนน"+ pointU);
-pointUU = pointU;	  
-  }
-	console.log(nameU);
-	
-	
-});	    
-	    
-	msg = {       
+     pointNO = pointU  
+  }	// ของ else ส่งคะแนน	
+msg = {       
   "type": "flex",
   "altText": "แต้มสะสม",
   "contents": {
@@ -201,7 +194,7 @@ pointUU = pointU;
                 },
                 {
                   "type": "text",
-                  "text": "ยังไม่มีการอัพเดท",
+                  "text": pointNO,
                   "flex": 5,
                   "size": "xl",
                   "weight": "bold",
@@ -226,7 +219,7 @@ pointUU = pointU;
                 },
                 {
                   "type": "text",
-                  "text": poinUU,
+                  "text": pointNO,
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
@@ -253,7 +246,7 @@ pointUU = pointU;
                 },
                 {
                   "type": "text",
-                  "text": "50",
+                  "text": pointNO,
                   "flex": 5,
                   "size": "xl",
                   "align": "start",
@@ -276,6 +269,12 @@ pointUU = pointU;
   }
 
         }
+ 
+});	    
+//////////////////////////////////////////////////////	    
+})	//client.getProfile    
+//////////////////////////////////////////////////////  //////////////////////////////////////////////////////	    
+	
 	
 
 	
