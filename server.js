@@ -138,7 +138,7 @@ console.log("คะแนน"+ pointU);
   }	// ของ else ส่งคะแนน	
 msg = {
         type: 'text',
-        text: pointNO
+        text: "555"
     };
  
 });	    
