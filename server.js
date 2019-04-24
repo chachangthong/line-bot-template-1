@@ -135,11 +135,12 @@ console.log("รอการอัพเดท");
  } else {
 console.log("คะแนน"+ pointU);
      pointNO = pointU  
-  }	// ของ else ส่งคะแนน	
-msg = {
+     msg = {
         type: 'text',
         text: "555"
     };
+	 
+  }	// ของ else ส่งคะแนน	
  
 });	    
 //////////////////////////////////////////////////////	    
