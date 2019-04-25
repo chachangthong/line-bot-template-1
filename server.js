@@ -80,27 +80,39 @@ function handleEvent(event) {
     }
 }
 
-function handleMessageEvent(event) {
+
+
+     ////getProfile
+	client.getProfile(event.source.userId)
+      .then((profile) => {
+	 var nameU = profile.displayName;
+	handleMessageEvent(nameU);	
+	})	//client.getProfile   
+	
+
+
+
+
+
+
+
+
+
+function handleMessageEvent(event,nameU) {
+	
+	
+    var eventText = event.message.text.toLowerCase();
+    var uid = event.source.userId
+    var showLog = "{ UserID : "+uid +" , " + "msg : "  + eventText + "}"
+    console.log(showLog);	
+	
+	
     var msg = {
         type: 'text',
         text: 'ช้างทองสวัสดีคะ 🙂'
     };
 
-    var eventText = event.message.text.toLowerCase();
-    var uid = event.source.userId
-    var showLog = "{ UserID : "+uid +" , " + "msg : "  + eventText + "}"
-    console.log(showLog);
-	
-	
 	//var userId = event.source.userId;  //uid
-	////getProfile
-	client.getProfile(event.source.userId)
-      .then((profile) => {
-	 var nameU = profile.displayName;	
-	
-	
-	
-    	
 
     if (eventText === 'สินค้าช้างทอง') {
         msg = {
@@ -218,7 +230,7 @@ console.log("คะแนน"+ pointU);
 
     }
 		
-})	//client.getProfile   		
+		
     //////////////////
     
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
