@@ -150,6 +150,20 @@ var msgTEST = {
 console.log("คะแนน"+ pointU);
 console.log("Token"+ event.replyToken);
 	    
+  reply(event.replyToken, msgTEST) {
+    const url = 'https://api.line.me/v2/bot/message/reply';
+    const body = {
+      replyToken: event.replyToken,
+      messages: msgTEST
+    };
+    debug('POST %s', url);
+    debug('%O', body);
+    return this.post(url, body).then(res => res.json()).then((result) => {
+      debug(result);
+      return result;
+    });
+  }    
+	    
 return client.replyMessage(event.replyToken, msgTEST);
 	    
 	    
