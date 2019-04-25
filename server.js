@@ -87,6 +87,9 @@ client.getProfile(e.source.userId).then((profile) => {
       console.log("Profile User ID:"+ profile.userId);
       console.log("Profile Picture URL:"+ profile.pictureUrl);
       console.log("Profile Status Message:"+ profile.statusMessage);
+	var uuuid = profile.displayName;
+	return uuuid;
+	handleMessageEvent(uuuid);
 });
 	
 console.log("+Name:"+ e.profile.displayName);
@@ -94,7 +97,7 @@ console.log("+Name:"+ e.profile.displayName);
 
 
 
-function handleMessageEvent(event) {
+function handleMessageEvent(event,uuuid) {
 	
 	
     var eventText = event.message.text.toLowerCase();
@@ -121,8 +124,8 @@ function handleMessageEvent(event) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else if (eventText === 'แต้มสะสม'){
-	
-
+console.log("uuuid"+uuuid);	
+//debug_check();
 
 msg = {
                 type: 'text',
