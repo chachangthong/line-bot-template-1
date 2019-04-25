@@ -74,15 +74,8 @@ function handleEvent(event) {
     
 	
     if (event.type === 'message' && event.message.type === 'text') {
-	    
-      ////getProfile
-	client.getProfile(event.source.userId)
-      .then((profile) => {
-	 var nameU = profile.displayName;
-	//handleMessageEvent(nameU);	
-	})	//client.getProfile  
-	    
-        handleMessageEvent(event,nameU);
+
+        handleMessageEvent(event);
     } else {
         return Promise.resolve(null);
     }
@@ -90,7 +83,7 @@ function handleEvent(event) {
 
 
 
- 
+
 	
 
 
@@ -110,6 +103,16 @@ function handleMessageEvent(event,nameU) {
     console.log(showLog);	
 	
 	
+	
+       ////getProfile
+	client.getProfile(event.source.userId)
+      .then((profile) => {
+	 var nameU = profile.displayName;
+	//handleMessageEvent(nameU);	
+	})	//client.getProfile  	
+	
+	
+	
     var msg = {
         type: 'text',
         text: 'ช้างทองสวัสดีคะ 🙂'
@@ -127,7 +130,7 @@ function handleMessageEvent(event,nameU) {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-else if (eventText === 'แต้มสะสม') {	
+else if (eventText === 'แต้มสะสม'){
 var data = { 
     name: nameU,		
 }
@@ -160,10 +163,15 @@ console.log("คะแนน"+ pointU);
                 text: "รอการอัพเดท"
             };
     });	
+    
+    
+msg = {
+                type: 'text',
+                text: "1"
+            };	
 	
 	
-	
-}// ของ else if  'แต้มสะสม'
+}   // ของ else if  'แต้มสะสม'
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
