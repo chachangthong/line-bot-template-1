@@ -103,11 +103,12 @@ function handleMessageEvent(event,nameU) {
     console.log(showLog);	
 	
 	
-	
+	var nameUname;
        ////getProfile
 	client.getProfile(event.source.userId)
       .then((profile) => {
 	 var nameU = profile.displayName;
+	nameUname = nameU;
 	//handleMessageEvent(nameU);	
 	})	//client.getProfile  	
 	
@@ -133,9 +134,9 @@ function handleMessageEvent(event,nameU) {
 else if (eventText === 'แต้มสะสม'){
 	
 var data = { 
-    name: nameU,		
+    name: nameUname,		
 }
-console.log("+++++++"+nameU);
+console.log("+++++++"+nameUname);
 console.log("--"+uid);
 ref.child(uid).update(data, function(err) {
         if (err) {
