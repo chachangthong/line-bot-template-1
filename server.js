@@ -74,7 +74,15 @@ function handleEvent(event) {
     
 	
     if (event.type === 'message' && event.message.type === 'text') {
-        handleMessageEvent(event);
+	    
+      ////getProfile
+	client.getProfile(event.source.userId)
+      .then((profile) => {
+	 var nameU = profile.displayName;
+	//handleMessageEvent(nameU);	
+	})	//client.getProfile  
+	    
+        handleMessageEvent(event,nameU);
     } else {
         return Promise.resolve(null);
     }
@@ -82,12 +90,7 @@ function handleEvent(event) {
 
 
 
-     ////getProfile
-	client.getProfile(event.source.userId)
-      .then((profile) => {
-	 var nameU = profile.displayName;
-	handleMessageEvent(nameU);	
-	})	//client.getProfile   
+ 
 	
 
 
