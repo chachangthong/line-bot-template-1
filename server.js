@@ -82,7 +82,7 @@ function handleEvent(event) {
 
 
 function debug_check(e) {
-client.getProfile(e.source.userId).then((profile) => {
+client.getProfile(event.source.userId).then((profile) => {
 	console.log("Profile Display Name:"+ profile.displayName);
       console.log("Profile User ID:"+ profile.userId);
       console.log("Profile Picture URL:"+ profile.pictureUrl);
@@ -124,8 +124,34 @@ function handleMessageEvent(event,uuuid) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else if (eventText === 'แต้มสะสม'){
-console.log("uuuid"+uuuid);	
-//debug_check();
+var data = { 
+    name: "NEW",		
+}
+	
+	//ตรวจสอบว่ามีข้อมูลไหม
+ref.once("value", function(snapshot) {
+  var pointU = snapshot.child(uid).child("point").val();
+	if (pointU == null) {
+    console.log("ไม่มีข้อมูล --  ลงใหม่");
+       //ไม่มี ให้ลงข้อมูล
+ref.child(uid).update(data, function(err) {
+        if (err) {
+  //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
+            } else {
+  //ลงข้อมูลได้  
+        }
+});
+    } else { //มีข้อมูลแล้ว
+            
+console.log("คะแนน"+ pointU);
+ }	// ของ else ส่งคะแนน
+	
+	
+		
+		
+	
+});	
+	
 
 msg = {
                 type: 'text',
