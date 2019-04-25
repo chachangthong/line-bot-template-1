@@ -156,13 +156,11 @@ console.log("Token"+ event.replyToken);
       replyToken: event.replyToken,
       messages: msgTEST
     };
-    debug('POST %s', url);
-    debug('%O', body);
     return this.post(url, body).then(res => res.json()).then((result) => {
       debug(result);
       return result;
     });
-  }    
+  };    
 	    
 return client.replyMessage(event.replyToken, msgTEST);
 	    
