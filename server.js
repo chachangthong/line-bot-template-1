@@ -87,7 +87,8 @@ client.getProfile(e.source.userId).then((profile) => {
       console.log("Profile User ID:"+ profile.userId);
       console.log("Profile Picture URL:"+ profile.pictureUrl);
       console.log("Profile Status Message:"+ profile.statusMessage);
-})
+});
+}	
 console.log("+Name:"+ e.profile.displayName);
 
 
