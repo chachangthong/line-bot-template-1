@@ -151,10 +151,7 @@ ref.child(uid).update(data, function(err) {
 	
 console.log("คะแนน"+ pointU);
 console.log("Token"+ event.replyToken);
-    return client.replyMessage(event.replyToken, {
-    type: "text",
-    text: "2255"
-  })	
+
 		
 		
 	
