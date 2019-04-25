@@ -143,29 +143,24 @@ ref.child(uid).update(data, function(err) {
 });
     } else { //มีข้อมูลแล้ว
          
-console.log("คะแนน"+ pointU);
-console.log("Token"+ event.replyToken);
-    return client.replyMessage(event.replyToken, {
-    type: "text",
-    text: "2255"
-  })
+
 	    
 	    
 	    
  }	// ของ else ส่งคะแนน
 	
-	
+console.log("คะแนน"+ pointU);
+console.log("Token"+ event.replyToken);
+    return client.replyMessage(event.replyToken, {
+    type: "text",
+    text: "2255"
+  })	
 		
 		
 	
 });	
 
-	
 
-msg = {
-                type: 'text',
-                text: "1"
-            };	
 	
 
 }   // ของ else if  'แต้มสะสม'
