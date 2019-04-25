@@ -157,7 +157,8 @@ console.log("Token"+ event.replyToken);
 	
 });	
 
-
+console.log("นน"+ pointU);
+console.log("TT"+ event.replyToken);
 	
 
 }   // ของ else if  'แต้มสะสม'
