@@ -142,10 +142,8 @@ ref.child(uid).update(data, function(err) {
         }
 });
     } else { //มีข้อมูลแล้ว
-echoman(ev)          
+         
 console.log("คะแนน"+ pointU);
-	
-	    
 	    
  }	// ของ else ส่งคะแนน
 	
@@ -154,14 +152,7 @@ console.log("คะแนน"+ pointU);
 		
 	
 });	
-	
-async function echoman(ev) {
-  const pro =  await client.getProfile(ev.source.userId);
-  return client.replyMessage(ev.replyToken, {
-    type: "text",
-    text: `${pro.displayName}さん、今「${ev.message.text}」って言いました？`
-  })
-}
+
 	
 
 msg = {
