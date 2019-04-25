@@ -142,9 +142,15 @@ ref.child(uid).update(data, function(err) {
         }
 });
     } else { //มีข้อมูลแล้ว
+var msgTEST = {
+        type: 'text',
+        text: '1'
+    };
+	    
 console.log("คะแนน"+ pointU);
-console.log("Token"+ event.replyToken);      
-
+console.log("Token"+ event.replyToken);
+	    
+return client.replyMessage(event.replyToken, msgTEST);
 	    
 	    
 	    
