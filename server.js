@@ -142,23 +142,22 @@ ref.child(uid).update(data, function(err) {
         }
 });
     } else { //มีข้อมูลแล้ว
-         
+console.log("คะแนน"+ pointU);
+console.log("Token"+ event.replyToken);      
 
 	    
 	    
 	    
  }	// ของ else ส่งคะแนน
 	
-console.log("คะแนน"+ pointU);
-console.log("Token"+ event.replyToken);
+console.log("คะแนน2"+ pointU);
+console.log("Token3"+ event.replyToken);
 
 		
 		
 	
 });	
 
-console.log("นน"+ pointU);
-console.log("TT"+ event.replyToken);
 	
 
 }   // ของ else if  'แต้มสะสม'
