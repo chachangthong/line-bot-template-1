@@ -71,8 +71,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 function handleEvent(event) {
 
     //console.log(event);  // ปริ้นทั้งหมด
-    
-	
+
     if (event.type === 'message' && event.message.type === 'text') {
 
         handleMessageEvent(event);
@@ -82,19 +81,19 @@ function handleEvent(event) {
 }
 
 
+function debug_check(e) {
+client.getProfile(e.source.userId).then((profile) => {
+	console.log("Profile Display Name:"+ profile.displayName);
+      console.log("Profile User ID:"+ profile.userId);
+      console.log("Profile Picture URL:"+ profile.pictureUrl);
+      console.log("Profile Status Message:"+ profile.statusMessage);
+})
+console.log("+Name:"+ e.profile.displayName);
 
 
-	
 
 
-
-
-
-
-
-
-
-function handleMessageEvent(event,nameU) {
+function handleMessageEvent(event) {
 	
 	
     var eventText = event.message.text.toLowerCase();
@@ -102,18 +101,7 @@ function handleMessageEvent(event,nameU) {
     var showLog = "{ UserID : "+uid +" , " + "msg : "  + eventText + "}"
     console.log(showLog);	
 	
-	
-	var nameUname;
-       ////getProfile
-	client.getProfile(event.source.userId)
-      .then((profile) => {
-	 var nameU = profile.displayName;
-	nameUname = nameU;
-	//handleMessageEvent(nameU);	
-	})	//client.getProfile  	
-	
-	
-	
+
     var msg = {
         type: 'text',
         text: 'ช้างทองสวัสดีคะ 🙂'
@@ -133,24 +121,14 @@ function handleMessageEvent(event,nameU) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else if (eventText === 'แต้มสะสม'){
 	
-var data = { 
-    name: nameUname,		
-}
-console.log("+++++++"+nameUname);
-console.log("--"+uid);
-ref.child(uid).update(data, function(err) {
-        if (err) {
-  //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
-            } else {
-  //ลงข้อมูลได้  
-        }
+
 
 msg = {
                 type: 'text',
                 text: "1"
             };	
 	
-   });	
+
 }   // ของ else if  'แต้มสะสม'
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
