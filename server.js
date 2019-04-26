@@ -1,9 +1,12 @@
-const express = require('express');
-const line = require('@line/bot-sdk');
+var linebot = require('linebot');
+const express = require('express')
+const bodyParser = require('body-parser');
 const http = require('http');
 var request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
+const functions = require("firebase-functions");
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -12,185 +15,294 @@ admin.initializeApp({
     uid: "my-service-worker"
   }
 });
+
+
+
 var db = admin.database();
-var ref = db.ref("/datdb");
+var ref = db.ref("/datadb");
 ref.once("value", function(snapshot) {
   //console.log(snapshot.val());
 });
 
-////////////////////////////////////mongodb////////////////////////////////////////////////////////
-/*
-const MongoClient = require('mongodb').MongoClient;
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
-var CONTACTS_COLLECTION = "data_changthong";
-var db;
-
-const url = process.env.MONGODB_URI;
-mongodb.MongoClient.connect(url, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-db = database;
-console.log("Database connection ready");
-*/	
-////////////////////////////////////////mongodb////////////////////////////////////////////////////
-
-require('dotenv').config();
 
 const app = express();
 
-    
-////////////////////////////////////////////////////////////////////////////////////////////
-const config = {
-    channelAccessToken: process.env.channelAccessToken,
-    channelSecret: process.env.channelSecret
-};
+var users=[];
 
-const client = new line.Client(config);
-
-app.get('/',function (req, res) {
-    res.end("ok bot")
-    })
-
-app.post('/webhook', line.middleware(config), (req, res) => {
-    Promise
-        .all(req.body.events.map(handleEvent))
-        .then((result) => res.json(result));
-	
+var bot = linebot({
+  channelId: "1566203051",
+  channelSecret: "b316afc916aeae77f04c89988efabcda",
+  channelAccessToken: "3ElmV4hWhjHccuz34k3WUfm6MgrU3BmEkfYLIuPsfx/umpaLjWeLBXiXmGDAFgE+d2i0dO3htzvRV676dcTLV2wiaS29rfM26RIdDcvOBAKTDEVc2oavzhgZF5nApE/NGkuc81tGAKdq+ubskwLQS1GUYhWQfeY8sLGRXgo3xvw="
 });
-////////////////////////////////////////////////////////////////////////////////////////////    
-    
-
-    
-    
-    
-    
-
-function handleEvent(event) {
-
-    //console.log(event);  // ปริ้นทั้งหมด
-
-    if (event.type === 'message' && event.message.type === 'text') {
-
-        handleMessageEvent(event);
-    } else {
-        return Promise.resolve(null);
-    }
-}
 
 
-function debug_check(e) {
-client.getProfile(event.source.userId).then((profile) => {
-	console.log("Profile Display Name:"+ profile.displayName);
-      console.log("Profile User ID:"+ profile.userId);
-      console.log("Profile Picture URL:"+ profile.pictureUrl);
-      console.log("Profile Status Message:"+ profile.statusMessage);
-	var uuuid = profile.displayName;
-	return uuuid;
-	handleMessageEvent(uuuid);
+app.listen(process.env.PORT || 80, function () {
+  console.log('LineBot is running.');
 });
-	
-console.log("+Name:"+ e.profile.displayName);
-}
+
+const linebotParser = bot.parser();
+
+app.post('/webhook', linebotParser);
 
 
+bot.on('message', function (event) {
+var msg = event.message.text;  
 
-function handleMessageEvent(event,uuuid) {
-	
-	
-    var eventText = event.message.text.toLowerCase();
-    var uid = event.source.userId
-    var showLog = "{ UserID : "+uid +" , " + "msg : "  + eventText + "}"
-    console.log(showLog);	
-	
+var messages;
+var messagesPoint;
+var pointU;
 
-    var msg = {
-        type: 'text',
-        text: 'ช้างทองสวัสดีคะ 🙂'
-    };
-
-	//var userId = event.source.userId;  //uid
-
-    if (eventText === 'สินค้าช้างทอง') {
-        msg = {
-            'type': 'image',
-            'originalContentUrl': 'https://www.igetweb.com/uploads/269/filemanager/211ef0e293ebc51c26deb468b13f52ac_full.png',
-            'previewImageUrl': 'https://www.igetweb.com/uploads/269/filemanager/211ef0e293ebc51c26deb468b13f52ac_full.png'
-        }
-    } 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-else if (eventText === 'แต้มสะสม'){
-var data = { 
-    name: "NEW",		
-}
-	
-	//ตรวจสอบว่ามีข้อมูลไหม
+//console.log(event);  //ปริ้นค่าทั้งหมด
+  if (msg === "แต้มสะสมช้างทอง"){
+    
+    //event.reply(messages)
+    
+    getDisplayName(event);
+     setTimeout(function() {
+      
+           
+          
+    
+//messages = {'type': 'text','text': "ไม่มีข้อมูล55555555",}          
 ref.once("value", function(snapshot) {
-  var pointU = snapshot.child(uid).child("point").val();
+  
+  pointU = snapshot.child(event.source.userId).child("point").val();
 	if (pointU == null) {
-    console.log("ไม่มีข้อมูล --  ลงใหม่");
-       //ไม่มี ให้ลงข้อมูล
-ref.child(uid).update(data, function(err) {
-        if (err) {
-  //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
-            } else {
-  //ลงข้อมูลได้  
+messages = {
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+      "size": "full",
+      "aspectRatio": "20:13",
+      "aspectMode": "cover",
+      "action": {
+        "type": "uri",
+        "label": "Line",
+        "uri": "https://linecorp.com/"
+      }
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Changthong Point",
+          "size": "xl",
+          "weight": "bold"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "sm",
+          "margin": "lg",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "คะแนนทั้งหมด",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": "ยังไม่มีข้อมูลนี้",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ใช้ไปแล้ว",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": "ยังไม่มีข้อมูลนี้",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            },{
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "คะแนนทั้งหมด",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": "ยังไม่มีข้อมูลนี้",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
         }
-});
-    } else { //มีข้อมูลแล้ว
-var msgTEST = {
-        type: 'text',
-        text: '1'
-    };
-	    
-console.log("คะแนน"+ pointU);
-console.log("Token"+ event.replyToken);
-	    
-  reply(event.replyToken, msgTEST) {
-    const url = 'https://api.line.me/v2/bot/message/reply';
-    const body = {
-      replyToken: event.replyToken,
-      messages: msgTEST
-    };
-    return this.post(url, body).then(res => res.json()).then((result) => {
-      debug(result);
-      return result;
-    });
-  };    
-	    
-return client.replyMessage(event.replyToken, msgTEST);
-	    
-	    
-	    
- }	// ของ else ส่งคะแนน
-	
-console.log("คะแนน2"+ pointU);
-console.log("Token3"+ event.replyToken);
+      ]
+    }
+  }
+}
+	  console.log(pointU);
+    console.log("ไม่มีข้อมูล");
+sendMessage(event,messages);    
+    }else { //มีข้อมูลแล้ว
+var point1;
+var point2;
+var point3;    
+    point1 = pointU;
+	  point2 = 00;
+	  point3 = 00;
+messages = {
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "hero": {
+      "type": "image",
+      "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+      "size": "full",
+      "aspectRatio": "20:13",
+      "aspectMode": "cover",
+      "action": {
+        "type": "uri",
+        "label": "Line",
+        "uri": "https://linecorp.com/"
+      }
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Changthong Point",
+          "size": "xl",
+          "weight": "bold"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "sm",
+          "margin": "lg",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "คะแนนทั้งหมด",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": pointU,
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ใช้ไปแล้ว",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": "-----",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            },{
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "คะแนนทั้งหมด",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#AAAAAA"
+                },
+                {
+                  "type": "text",
+                  "text": "-----",
+                  "flex": 5,
+                  "size": "sm",
+                  "color": "#666666",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}  
+    console.log(pointU);
+    console.log("OK Data");
+    //messages = {'type': 'text','text': pointU,}
+sendMessage(event,messages);
+}
+})
+  }, 1000);
 
-		
-		
-	
-});	
+}
 
-	
 
-}   // ของ else if  'แต้มสะสม'
-	
 
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-    
-    
-    ////////////////////////
-    else if (eventText === 'สูตรชงเครื่องดื่ม') {
-        msg ={
+
+
+
+else if (msg === 'สูตรชงเครื่องดื่ม') {
+        messages ={
   "type": "template",
   "altText": "สูตรชงเครื่องดื่ม",
   "template": {
@@ -248,28 +360,135 @@ console.log("Token3"+ event.replyToken);
     ]
   }
 } 
+sendMessage(event,messages);
+    }else {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////  //////////////////////////////  //////////////////////////////  
+sendMessage(event,msg);
+//event.reply(event.message.text)
+  var showLog = "{ UserID : "+event.source.userId +" , " + "msg : "  + msg + "}"
+  console.log(showLog);
     }
-		
-		
-    //////////////////
-    
- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-
-
-    //request('http://fb-alert-iot.herokuapp.com/notify?token=hCT2D0fMV2NwALN0xYv70wAlcJGXBYMGzUOjT4xs5Nq&msg=ss');
-    return client.replyMessage(event.replyToken, msg);
-}
-    
-    
-    
-    
-    app.set('port', (process.env.PORT || 5000));
-
-app.listen(app.get('port'), function () {
-    console.log('run at port', app.get('port'));
+////////////////////////////////////////////////////////////  //////////////////////////////  //////////////////////////////    
 });
-	
-	//  });         //mongodb
+
+
+ 
+
+function getDisplayName(eve,msg){
+   bot.getUserProfile(eve.source.userId);
+   eve.source.profile().then(function (profile) {
+
+      
+      var data = { 
+          name: profile.displayName,		
+        }   
+  
+      ref.child(eve.source.userId).update(data, function(err) {
+        if (err) {
+            //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
+            } else {
+            //ลงข้อมูลได้  
+         }
+      });
+      console.log(profile.displayName);
+      event.reply(event + JSON.stringify(event));
+      //users[eve.source.userId].replies[0]=profile.displayName;
+   }).catch(function (error) {
+       // error 
+   });
+}
+
+
+
+
+function sendMessage(eve,msg){
+   eve.reply(msg).then(function(data) {
+      // success 
+      return true;
+   }).catch(function(error) {
+      // error 
+      return false;
+   });
+}
+
+
+
+
+function getPoint(eve,msg){
+    bot.getUserProfile(eve.source.userId);
+   eve.source.profile().then(function (profile) { 
+ var data = { 
+          name: profile.displayName,		
+        }  
+        
+ref.once("value", function(snapshot) {
+  var pointU = snapshot.child(eve.source.userId).child("point").val();
+	if (pointU == null) {
+    console.log("ไม่มีข้อมูล --  ลงใหม่");
+       //ไม่มี ให้ลงข้อมูล
+ref.child(eve.source.userId).update(data, function(err){
+        if (err) {
+   console.log("ok"); 
+   console.log(err); 
+  //ref.push(data) ลงข้อมูลไม่ได้ มีปัญหา
+            } else {
+   console.log("ok222");            
+  //ลงข้อมูลได้  
+        }
+});
+    } else { //มีข้อมูลแล้ว
+    console.log(pointU);
+    console.log("up");
+var msgTEST = {
+        type: 'text',
+        text: '1'
+        
+    };
+//sendMessage(event,msgTEST);    
+    
+  }
+});  
+
+
+}).catch(function (error) {
+       // error 
+   });
+
+
+
+}
+///////////////////-+-+-+-+
 
 
