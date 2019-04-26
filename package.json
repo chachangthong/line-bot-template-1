@@ -17,7 +17,7 @@
     "request": "2.83.0",
     "dotenv": "^4.0.0",
     "mongodb": "^2.1.6",
-    "firebase-admin": "7.3.0"
+    "firebase-admin": "7.3.0",
     "linebot": "1.4.1"
     
   }
