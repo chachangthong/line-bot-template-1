@@ -59,10 +59,7 @@ var pointU;
     
     getDisplayName(event);
      setTimeout(function() {
-      
-           
-          
-    
+
 //messages = {'type': 'text','text': "ไม่มีข้อมูล55555555",}          
 ref.once("value", function(snapshot) {
   
@@ -361,7 +358,22 @@ else if (msg === 'สูตรชงเครื่องดื่ม') {
   }
 } 
 sendMessage(event,messages);
-    }else {
+    }else if (msg === 'ร้านตัวแทนจำหน่าย') {
+        messages ={
+ 	 "type": "text",
+ 	 "text": "พิมพ์ชื่อจังหวัดของท่าน"
+	}
+	    sendMessage(event,messages);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	else {
 
 
 
